@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ControleAlmoxarifado")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fea2f011d83633b489ff0821c14f5ba9ee05f55")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8055198e623d0a09c1e42d7d0875a75d8da12552")]
 [assembly: System.Reflection.AssemblyProductAttribute("ControleAlmoxarifado")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ControleAlmoxarifado")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

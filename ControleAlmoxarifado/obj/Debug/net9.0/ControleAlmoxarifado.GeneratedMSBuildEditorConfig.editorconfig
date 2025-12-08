@@ -20,22 +20,6 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/C\#/aspnet-ControlAlmoxarifado/ControleAlmoxarifado/ControleAlmoxarifado/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Q29udHJvbGVBbG1veGFyaWZhZG9cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/C\#/aspnet-ControlAlmoxarifado/ControleAlmoxarifado/ControleAlmoxarifado/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Q29udHJvbGVBbG1veGFyaWZhZG9cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/C\#/aspnet-ControlAlmoxarifado/ControleAlmoxarifado/ControleAlmoxarifado/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Q29udHJvbGVBbG1veGFyaWZhZG9cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/C\#/aspnet-ControlAlmoxarifado/ControleAlmoxarifado/ControleAlmoxarifado/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Q29udHJvbGVBbG1veGFyaWZhZG9cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/C\#/aspnet-ControlAlmoxarifado/ControleAlmoxarifado/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
