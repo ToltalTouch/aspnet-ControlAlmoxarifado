@@ -1,6 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using ControleAlmoxarifado.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Register ApplicationDbContext. Using InMemory provider for quick setup — change to SQL Server or another provider in production.
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseInMemoryDatabase("ControleDB"));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

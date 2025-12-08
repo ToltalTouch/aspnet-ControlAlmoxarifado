@@ -1,14 +1,14 @@
-﻿<div class="container-fluid">
+﻿@model ControleAlmoxarifado.Models.HomeIndexViewModel
+
+<div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
         <nav class="col-md-2 d-none d-md-block bg-light sidebar pt-3">
             <div class="sidebar-sticky">
-                <h5 class="px-3">Almoxarifado Pro</h5>
+                <h5 class="px-3">Menu</h5>
                 <ul class="nav flex-column mt-3">
                     <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Dashboard</a></li>
-                    <li class="nav-item px-3 py-1"><a class="nav-link active" href="#">Inventário Atual</a></li>
                     <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Categorias</a></li>
-                    <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Localizações</a></li>
                     <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Entradas</a></li>
                     <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Saídas</a></li>
                     <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Relatórios</a></li>
@@ -19,7 +19,7 @@
         <!-- Main content -->
         <main role="main" class="col-md-10 ml-sm-auto px-4">
             <div class="d-flex align-items-center justify-content-between pt-3 pb-2 mb-3 border-bottom">
-                <h2>Inventário Atual</h2>
+                <h2>Almoxarifado Atual</h2>
                 <div class="d-flex align-items-center">
                     <div class="me-2" style="min-width:420px;">
                         <input class="form-control" type="search" placeholder="Buscar SKU, Nome, Nº Série..." aria-label="Buscar">
@@ -33,9 +33,12 @@
                 <div class="card-body">
                     <div class="row g-2">
                         <div class="col-md-3">
+
                             <select class="form-select">
                                 <option>Categoria: Todas</option>
-                                <option>Hardware</option>
+                                <option>Uniforme</option>
+                                <option>Botas</option>
+                                <option>Coletes</option>
                                 <option>Consumíveis</option>
                             </select>
                         </div>
@@ -44,13 +47,7 @@
                                 <option>Status: Todos</option>
                                 <option>OK</option>
                                 <option>Baixo</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-select">
-                                <option>Local: Todos</option>
-                                <option>Localario 1</option>
-                                <option>Localario 2</option>
+                                <option>Vazio</option>
                             </select>
                         </div>
                         <div class="col-md-3 d-flex justify-content-end">
@@ -68,41 +65,45 @@
                             <thead class="table-light">
                                 <tr>
                                     <th style="width:60px"></th>
-                                    <th>SKU</th>
-                                    <th>Nome</th>
+                                    <th>Imagem</th>
+                                    <th>Item</th>
+                                    <th>Tamanho</th>
+                                    <th>Quantidade</th>
+                                    <th>Gênero</th>
                                     <th>Local</th>
-                                    <th>QTD (Status)</th>
-                                    <th>UN</th>
+                                    <th>Status</th>
                                     <th style="width:120px">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Exemplo de linhas estáticas; substitua por loop Razor com model real -->
-                                <tr>
-                                    <td><img src="/wwwroot/lib/bootstrap/icons/box.svg" alt="" style="width:40px"></td>
-                                    <td>2010001</td>
-                                    <td>Inventário Atual Careloa</td>
-                                    <td>Localario 1</td>
-                                    <td><span class="badge bg-success">500 (OK)</span></td>
-                                    <td>UN</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-outline-primary me-1" href="#">✏️</a>
-                                        <a class="btn btn-sm btn-outline-secondary" href="#">⋮</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="/wwwroot/lib/bootstrap/icons/box.svg" alt="" style="width:40px"></td>
-                                    <td>2010008</td>
-                                    <td>Inventário Atual Othentilanto</td>
-                                    <td>Localario 1</td>
-                                    <td><span class="badge bg-danger">02 (Baixo)</span></td>
-                                    <td>UN</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-outline-primary me-1" href="#">✏️</a>
-                                        <a class="btn btn-sm btn-outline-secondary" href="#">⋮</a>
-                                    </td>
-                                </tr>
-                                <!-- ... -->
+                                @if (Model?.Items != null && Model.Items.Any())
+                                {
+                                    foreach (var item in Model.Items)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <img src="@item.ImagemUrl" class="img-thumbnail" style="max-width:64px;" alt="@item.Item" />
+                                            </td>
+                                            <td>@item.Item</td>
+                                            <td>@item.Tamanho</td>
+                                            <td>@item.Quantidade</td>
+                                            <td>@item.Genero</td>
+                                            <td>@item.Local</td>
+                                            <td>@(item.Quantidade > 0 ? "OK" : "Baixo")</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-outline-primary me-1" href="@Url.Action("Edit", "Home", new { id = item.Id })">✏️</a>
+                                                <!-- <a class="btn btn-sm btn-outline-secondary" href="#">⋮</a> -->
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="10" class="text-center">Nenhum item encontrado.</td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

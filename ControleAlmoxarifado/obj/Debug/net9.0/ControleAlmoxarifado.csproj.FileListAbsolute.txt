@@ -7,6 +7,10 @@ C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\bin\Debug\net9.0\ControleA
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\bin\Debug\net9.0\ControleAlmoxarifado.runtimeconfig.json
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\bin\Debug\net9.0\ControleAlmoxarifado.dll
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\bin\Debug\net9.0\ControleAlmoxarifado.pdb
+C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll
+C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\ControleAlmoxarifado.csproj.AssemblyReference.cache
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\rpswa.dswa.cache.json
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\ControleAlmoxarifado.GeneratedMSBuildEditorConfig.editorconfig
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\ControleAlmoxarifado.AssemblyInfoInputs.cache
@@ -90,6 +94,7 @@ C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\staticweb
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\staticwebassets.development.json
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\Controle.79F6F6FD.Up2Date
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\ControleAlmoxarifado.dll
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\refint\ControleAlmoxarifado.dll
 C:\C#\aspnet-ControlAlmoxarifado\ControleAlmoxarifado\obj\Debug\net9.0\ControleAlmoxarifado.pdb

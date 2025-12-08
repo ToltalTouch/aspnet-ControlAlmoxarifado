@@ -1,21 +1,30 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ControleAlmoxarifado.Models;
+using ControleAlmoxarifado.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ControleAlmoxarifado.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _db;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
     {
         _logger = logger;
+        _db = db;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var model = new HomeIndexViewModel
+        {
+            Items = _db?.Itens?.ToList() ?? new List<Itens>()
+        };
+
+        return View(model);
     }
 
     public IActionResult Privacy()

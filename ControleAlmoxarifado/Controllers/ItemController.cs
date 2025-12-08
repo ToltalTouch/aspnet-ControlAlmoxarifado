@@ -1,0 +1,23 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+
+using ControleAlmoxarifado.Data;
+using ControleAlmoxarifado.Models;
+
+namespace ControleAlmoxarifado.Controllers
+{
+    public class ItemController : Controller
+    {
+    private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _env;
+        private readonly IConfiguration _config;
+        public ItemController(ApplicationDbContext db, IWebHostEnvironment env, IConfiguration config)
+        {
+            _db= db;
+            _env = env;
+            _config = config;
+        }
+
+    }
+}
