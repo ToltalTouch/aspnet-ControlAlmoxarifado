@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Inventory Management System</h1>
+    <p>This application allows you to manage item entries and exits in the warehouse.</p>
+    <p>Learn more about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div>
+        <a class="btn btn-primary" href="@Url.Action("Create", "Items")">Add New Item</a>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Transactions")">View Transactions</a>
+    </div>
+</div>

@@ -4,6 +4,19 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Evita incluir arquivos fora da pasta do projeto que causam duplicação (há uma cópia em ../) -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Incluir apenas os arquivos fonte dentro da subpasta ControleAlmoxarifado deste projeto -->
+    <Compile Include="ControleAlmoxarifado\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Pacotes mínimos para Entity Framework Core usado pelo ApplicationDbContext -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.12" />
+  </ItemGroup>
 
 </Project>

@@ -1,8 +1,119 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar pt-3">
+            <div class="sidebar-sticky">
+                <h5 class="px-3">Almoxarifado Pro</h5>
+                <ul class="nav flex-column mt-3">
+                    <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Dashboard</a></li>
+                    <li class="nav-item px-3 py-1"><a class="nav-link active" href="#">Inventário Atual</a></li>
+                    <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Categorias</a></li>
+                    <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Localizações</a></li>
+                    <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Entradas</a></li>
+                    <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Saídas</a></li>
+                    <li class="nav-item px-3 py-1"><a class="nav-link" href="#">Relatórios</a></li>
+                </ul>
+            </div>
+        </nav>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <!-- Main content -->
+        <main role="main" class="col-md-10 ml-sm-auto px-4">
+            <div class="d-flex align-items-center justify-content-between pt-3 pb-2 mb-3 border-bottom">
+                <h2>Inventário Atual</h2>
+                <div class="d-flex align-items-center">
+                    <div class="me-2" style="min-width:420px;">
+                        <input class="form-control" type="search" placeholder="Buscar SKU, Nome, Nº Série..." aria-label="Buscar">
+                    </div>
+                    <a class="btn btn-success ms-3" href="#">+ Nova Entrada</a>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option>Categoria: Todas</option>
+                                <option>Hardware</option>
+                                <option>Consumíveis</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option>Status: Todos</option>
+                                <option>OK</option>
+                                <option>Baixo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select">
+                                <option>Local: Todos</option>
+                                <option>Localario 1</option>
+                                <option>Localario 2</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end">
+                            <button class="btn btn-outline-secondary me-2">Limpar Filtros</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory table -->
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width:60px"></th>
+                                    <th>SKU</th>
+                                    <th>Nome</th>
+                                    <th>Local</th>
+                                    <th>QTD (Status)</th>
+                                    <th>UN</th>
+                                    <th style="width:120px">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Exemplo de linhas estáticas; substitua por loop Razor com model real -->
+                                <tr>
+                                    <td><img src="/wwwroot/lib/bootstrap/icons/box.svg" alt="" style="width:40px"></td>
+                                    <td>2010001</td>
+                                    <td>Inventário Atual Careloa</td>
+                                    <td>Localario 1</td>
+                                    <td><span class="badge bg-success">500 (OK)</span></td>
+                                    <td>UN</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-primary me-1" href="#">✏️</a>
+                                        <a class="btn btn-sm btn-outline-secondary" href="#">⋮</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><img src="/wwwroot/lib/bootstrap/icons/box.svg" alt="" style="width:40px"></td>
+                                    <td>2010008</td>
+                                    <td>Inventário Atual Othentilanto</td>
+                                    <td>Localario 1</td>
+                                    <td><span class="badge bg-danger">02 (Baixo)</span></td>
+                                    <td>UN</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-outline-primary me-1" href="#">✏️</a>
+                                        <a class="btn btn-sm btn-outline-secondary" href="#">⋮</a>
+                                    </td>
+                                </tr>
+                                <!-- ... -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    Página 1 de 10
+                </div>
+            </div>
+        </main>
+    </div>
 </div>
