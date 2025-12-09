@@ -1,6 +1,4 @@
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ControleAlmoxarifado.Models;
 using ControleAlmoxarifado.Data;
@@ -20,16 +18,6 @@ public class HomeController : Controller
         _db = db;
     }
 
-    public IActionResult Index()
-    {
-        var model = new HomeIndexViewModel
-        {
-            Items = _db?.Itens?.ToList() ?? new List<Itens>()
-        };
-
-        return View(model);
-    }
-
     public IActionResult Privacy()
     {
         return View();
@@ -39,5 +27,22 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
+    {
+        var query = _db.Itens.AsNoTracking().OrderBy(i => i.Id); // ajuste a ordenação conforme necessário
+        var total = await query.CountAsync();
+        var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+        var vm = new HomeIndexViewModel
+        {
+            Items = items,
+            Page = page,
+            PageSize = pageSize,
+            TotalItems = total
+        };
+
+        return View(vm);
     }
 }
