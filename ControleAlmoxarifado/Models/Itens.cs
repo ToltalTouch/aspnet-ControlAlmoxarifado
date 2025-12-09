@@ -1,9 +1,8 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata;
 
 namespace ControleAlmoxarifado.Models
 {
+    [Table("DB_UNIFORME")]
     public class Itens
     {
         public int Id { get; set; }
@@ -11,7 +10,8 @@ namespace ControleAlmoxarifado.Models
         public string Descricao { get; set; } = string.Empty;
         public string Tamanho { get; set; } = string.Empty;
         public int Quantidade { get; set; }
-        public int Genero { get; set; }
+        // Alterado para string pois a tabela importada contém valores textuais (ex: "FEMININO").
+        public string Genero { get; set; } = string.Empty;
         public string Local { get; set; } = string.Empty;
         public string ImagemUrl { get; set; } = string.Empty;
     }
