@@ -48,15 +48,15 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
 app.UseAuthorization();
 
-app.MapStaticAssets();
+// Serve static files from wwwroot (replacement for missing MapStaticAssets extension)
+app.UseStaticFiles();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+    ;
 
 
 app.Run();

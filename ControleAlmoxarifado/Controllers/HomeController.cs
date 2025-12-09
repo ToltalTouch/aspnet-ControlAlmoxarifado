@@ -1,8 +1,11 @@
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ControleAlmoxarifado.Models;
 using ControleAlmoxarifado.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace ControleAlmoxarifado.Controllers;
 
