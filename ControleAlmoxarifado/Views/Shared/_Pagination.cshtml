@@ -1,0 +1,47 @@
+@model ControleAlmoxarifado.Models.HomeIndexViewModel
+
+@if (Model == null || Model.TotalPages <= 1)
+{
+    <div></div>
+}
+else
+{
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            @{
+                var start = (Model.Page - 1) * Model.PageSize + 1;
+                var end = Math.Min(Model.Page * Model.PageSize, Model.TotalItems);
+            }
+            <span>Mostrando @start a @end de @Model.TotalItems</span>
+        </div>
+
+        <nav aria-label="Paginação">
+            <ul class="pagination mb-0">
+                <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = 1, pageSize = Model.PageSize, category = Model.SelectedCategory, size = Model.SelectedSize, gender = Model.SelectedGender, status = Model.SelectedStatus, q = Model.SearchQuery })">Primeira</a>
+                </li>
+                <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.Page - 1, pageSize = Model.PageSize, category = Model.SelectedCategory, size = Model.SelectedSize, gender = Model.SelectedGender, status = Model.SelectedStatus, q = Model.SearchQuery})">Anterior</a>
+                </li>
+
+                @{
+                    var startPage = Math.Max(1, Model.Page - 2);
+                    var endPage = Math.Min(Model.TotalPages, Model.Page + 2);
+                    for (int p = startPage; p <= endPage; p++)
+                    {
+                        <li class="page-item @(p == Model.Page ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = p, pageSize = Model.PageSize, category = Model.SelectedCategory, size = Model.SelectedSize, gender = Model.SelectedGender, status = Model.SelectedStatus, q = Model.SearchQuery })">@p</a>
+                        </li>
+                    }
+                }
+
+                <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.Page + 1, pageSize = Model.PageSize, category = Model.SelectedCategory, size = Model.SelectedSize, gender = Model.SelectedGender, status = Model.SelectedStatus, q = Model.SearchQuery })">Próximo</a>
+                </li>
+                <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.TotalPages, pageSize = Model.PageSize, category = Model.SelectedCategory, size = Model.SelectedSize, gender = Model.SelectedGender, status = Model.SelectedStatus })">Última</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}

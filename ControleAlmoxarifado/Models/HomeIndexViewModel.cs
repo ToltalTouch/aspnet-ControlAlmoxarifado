@@ -17,9 +17,12 @@ namespace ControleAlmoxarifado.Models
         public IEnumerable<string> Statuses { get; set; } = Array.Empty<string>();
         public IEnumerable<string> SizeOptions { get; set; } = Array.Empty<string>();
         public IEnumerable<string> GenderOptions { get; set; } = Array.Empty<string>();
+
         public string? SelectedCategory { get; set; }
         public string? SelectedStatus { get; set; }
         public string? SelectedSize { get; set; }
         public string? SelectedGender { get; set; }
+
+        public string? SearchQuery { get; set; }
     }
 }
