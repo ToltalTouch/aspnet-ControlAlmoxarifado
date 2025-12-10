@@ -32,43 +32,87 @@
                 </div>
             </div>
 
-            <!-- Filters -->
             <div class="card mb-3">
                 <div class="card-body">
-                    <div class="row g-2">
-                        <div class="col-md-3">
+                    <form method="get" class="row g-2">
+                        <div class="me-3">
+                            <select class="form-select" name="category" onchange="this.form.submit()">
+                                <option value="">Categoria: Todas</option>
+                                @foreach (var c in Model.Categories ?? Enumerable.Empty<string>())
+                                {
+                                    if (c == Model.SelectedCategory)
+                                    {
+                                        <option value="@c" selected>@c</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@c">@c</option>
+                                    }
+                                }
+                            </select>
+                        </div>
 
-                            <select class="form-select">
-                                <option>Categoria: Todas</option>
-                                <option>Uniforme</option>
-                                <option>Botas</option>
-                                <option>Coletes</option>
-                                <option>Consumíveis</option>
-                            </select>
-                        </div>
                         <div class="col-md-3">
-                            <select class="form-select">
-                                <option>Status: Todos</option>
-                                <option>OK</option>
-                                <option>Baixo</option>
-                                <option>Vazio</option>
+                            <select class="form-select" name="size" onchange="this.form.submit()">
+                                <option value="">Tamanho: Todos</option>
+                                @foreach (var s in Model.SizeOptions ?? Enumerable.Empty<string>())
+                                {
+                                    if (s == Model.SelectedSize)
+                                    {
+                                        <option value="@s" selected>@s</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@s">@s</option>
+                                    }
+                                }
                             </select>
                         </div>
-                        <div class="col-md-3 d-flex justify-content-end">
-                            <button class="btn btn-outline-secondary me-2">Limpar Filtros</button>
+
+                        <div class="col-md-3">
+                            <select class="form-select" name="gender" onchange="this.form.submit()">
+                                <option value="">Gênero: Todos</option>
+                                @foreach (var g in Model.GenderOptions ?? Enumerable.Empty<string>())
+                                {
+                                    if (g == Model.SelectedGender)
+                                    {
+                                        <option value="@g" selected>@g</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@g">@g</option>
+                                    }
+                                }
+                            </select>
                         </div>
-                    </div>
+
+                        <div class="col-md-3">
+                            <select class="form-select" name="status" onchange="this.form.submit()">
+                                <option value="">Status: Todos</option>
+                                @foreach (var s in Model.Statuses ?? Enumerable.Empty<string>())
+                                {
+                                    if (s == Model.SelectedStatus)
+                                    {
+                                        <option value="@s" selected>@s</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@s">@s</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </form>
                 </div>
             </div>
 
-            <!-- Inventory table -->
             <div class="card">
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th style="max-width:64px;">Imagem</th>
+                                    <th style="max-width:120px;">Imagem</th>
                                     <th>Item</th>
                                     <th>Tamanho</th>
                                     <th>Quantidade</th>
@@ -87,7 +131,7 @@
                                     {
                                         <tr>
                                             <td>
-                                                <img src="@item.ImagemUrl" class="img-thumbnail" style="max-width:64px;" alt="@item.Item" />
+                                                <img src="@item.ImagemUrl" class="img-thumbnail" style="max-width:120px;" alt="@item.Item" />
                                             </td>
                                             <td>@item.Item</td>
                                             <td>@item.Tamanho</td>
@@ -113,6 +157,7 @@
                         </table>
                     </div>
                 </div>
+
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <div>
                         @if (Model != null && Model.TotalPages > 0)
