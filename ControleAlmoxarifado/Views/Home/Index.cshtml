@@ -169,14 +169,13 @@
                                             </td>
                                             <td>@item.Item</td>
                                             <td>@item.Tamanho</td>
-                                            <td>@item.Quantidade</td>
+                                            <td data-quantity-id="@item.Id">@item.Quantidade</td>
                                             <td>@item.Genero</td>
                                             <td>@item.Local</td>
                                             <td>@(item.Quantidade > 0 ? "OK" : "Baixo")</td>
                                             <td></td>
                                             <td>
-                                                <a class="btn btn-sm btn-outline-primary me-1" href="@Url.Action("Edit", "Home", new { id = item.Id })">✏️</a>
-                                                <!-- <a class="btn btn-sm btn-outline-secondary" href="#">⋮</a> -->
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-outline-primary me-1 btn-edit" data-id="@item.Id" title="Editar">✏️</a>
                                             </td>
                                         </tr>
                                     }
@@ -190,6 +189,14 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+
+                <div class="modal fade" id="modalEdit" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content" id="modalEditContent">
+                        </div>
+                    </div>
+                </div>
                 </div>
 
                 <div class="card-footer">
