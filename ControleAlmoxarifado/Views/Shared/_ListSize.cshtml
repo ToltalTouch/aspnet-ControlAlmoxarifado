@@ -1,0 +1,18 @@
+@model IEnumerable<string>
+
+@{
+    var itemName = ViewBag.ItemName as string ?? "";
+}
+
+<div class="d-flex flex-wrap gap-2">
+    @foreach (var size in Model)
+    {
+        <a class="btn btn-sm btn-outline-primary"
+            href="@Url.Action("Index", "Home", new { category = itemName, size = size, page = 1})">@size</a>
+            @size
+    }
+    if (!Model.Any())
+    {
+        <span class="text-muted"></span>
+    }
+</div>  

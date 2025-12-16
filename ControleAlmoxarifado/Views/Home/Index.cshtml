@@ -29,6 +29,7 @@
                 </div>
             </div>
 
+
             <div class="card mb-3">
                 <div class="card-body">
                     <form method="get" class="row g-2">
@@ -143,19 +144,21 @@
 
             <div class="card">
                 <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
+                    <div id="items-area" class="items-area position-relative">
+                        <div id="items-loading-overlay" class="items-loading-overlay" aria-hidden="true" style="display:none;">
+                            <div class="items-loading-content text-center">
+                                <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
+                                <div class="mt-2">Carregando...</div>
+                            </div>
+                        </div>
+
+                        <div class="items-content">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
                             <thead class="table-light">
                                 <tr>
                                     <th style="max-width:110px;">Imagem</th>
                                     <th style="max-width:260px;">Item</th>
-                                    <th style="max-width:100px;">Tamanho</th>
-                                    <th style="max-width:110px;">QNT</th>
-                                    <th style="max-width:100px;">Gênero</th>
-                                    <th style="max-width:110px;">Local</th>
-                                    <th style="max-width:90px;">Status</th>
-                                    <th></th>
-                                    <th style="width:90px">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -163,19 +166,27 @@
                                 {
                                     foreach (var item in Model.Items)
                                     {
-                                        <tr>
+                                        <tr data-item-id="@item.Id">
                                             <td>
-                                                <img src="@item.ImagemUrl" class="img-thumbnail" style="max-width:120px;" alt="@item.Item" />
+                                                <img src="@item.ImagemUrl" 
+                                                    class="img-thumbnail" 
+                                                    style="max-width:120px;" 
+                                                    alt="@item.Item" />
                                             </td>
-                                            <td>@item.Item</td>
-                                            <td>@item.Tamanho</td>
-                                            <td data-quantity-id="@item.Id">@item.Quantidade</td>
-                                            <td>@item.Genero</td>
-                                            <td>@item.Local</td>
-                                            <td>@(item.Quantidade > 0 ? "OK" : "Baixo")</td>
-                                            <td></td>
                                             <td>
-                                                <a href="javascript:void(0)" class="btn btn-sm btn-outline-primary me-1 btn-edit" data-id="@item.Id" title="Editar">✏️</a>
+                                                <a href="javascript:void(0)"
+                                                    class="item-toggle"
+                                                    data-item="@item.Item">@item.Item</a>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="sizes-row" data-parent-id="@item.Id" style="display:none;">
+                                            <td colspan="9">
+                                        <div class="sizes-container"
+                                            data-item="@item.Item"
+                                            data-loaded="false"
+                                            data-selected-size="@(Model?.SelectedSize ?? "")"
+                                            data-selected-gender="@(Model?.SelectedGender ?? "")"></div>
                                             </td>
                                         </tr>
                                     }
@@ -195,7 +206,10 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content" id="modalEditContent">
                         </div>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
                 </div>
 

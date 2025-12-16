@@ -29,3 +29,32 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Loading overlay for items area */
+.items-area {
+  min-height: 80px;
+  transition: opacity 250ms ease;
+  position: relative;
+}
+
+.items-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: opacity 200ms ease;
+}
+
+.items-loading-overlay .items-loading-content {
+  text-align: center;
+  color: #0d6efd;
+}
+
+.items-area.loading .items-content {
+  opacity: 0.35;
+  pointer-events: none;
+  user-select: none;
+}

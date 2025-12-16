@@ -1,0 +1,25 @@
+@model IEnumerable<string>
+
+@{
+    var itemName = ViewBag.ItemName as string ?? "";
+}
+
+<div class="d-flex flex-wrap gap-2 align-items-start">
+    <button type="button" class="btn btn-sm btn-outline-secondary size-select" data-size="ALL" title="Mostrar todas as variantes deste item">Todos</button>
+    @foreach (var s in Model)
+    {
+        <button type="button"
+                class="btn btn-sm btn-outline-primary size-select"
+                data-size="@s"
+                title="Mostrar variantes com tamanho @s">
+            @s
+        </button>
+    }
+    @if (!Model.Any())
+    {
+        <span class="text-muted">Sem tamanhos</span>
+    }
+</div>
+
+<!-- placeholder onde serão injetados os detalhes da opção selecionada -->
+<div class="size-details mt-2"></div>

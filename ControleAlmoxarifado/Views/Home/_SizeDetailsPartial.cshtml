@@ -1,0 +1,36 @@
+@model IEnumerable<ControleAlmoxarifado.Models.Itens>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="text-muted">Nenhuma variante encontrada para este tamanho.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-sm mb-0">
+            <thead>
+                <tr>
+                    <th>Tamanho</th>
+                    <th style="width:110px;">Quantidade</th>
+                    <th>Gênero</th>
+                    <th>Local</th>
+                    <th style="width:110px">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var v in Model)
+                {
+                    <tr>
+                        <td>@v.Tamanho</td>
+                        <td data-quantity-id="@v.Id">@v.Quantidade</td>
+                        <td>@v.Genero</td>
+                        <td>@v.Local</td>
+                        <td>
+                            <a href="javascript:void(0)" class="btn btn-sm btn-outline-primary btn-edit" data-id="@v.Id" title="Editar variante">✏️</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
