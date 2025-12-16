@@ -145,13 +145,13 @@
             <div class="card">
                 <div class="card-body p-0">
                     <div id="items-area" class="items-area position-relative">
-                        <div id="items-loading-overlay" class="items-loading-overlay" aria-hidden="true" style="display:none;">
-                            <div class="items-loading-content text-center">
-                                <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
-                                <div class="mt-2">Carregando...</div>
-                            </div>
-                        </div>
+                        @{
+                            ViewData["overlayId"] = "items-loading-overlay";
+                            ViewData["message"] = "Carregando itens...";
+                            ViewData["hidden"] = true;
+                        }
 
+                        @await Html.PartialAsync("_LoadingOverlay")
                         <div class="items-content">
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
@@ -201,13 +201,14 @@
                         </table>
                     </div>
                 </div>
+                </div>
 
                 <div class="modal fade" id="modalEdit" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content" id="modalEditContent">
                         </div>
-                            </table>
-                        </div>
+                        
+                    </div>
                     </div>
 
                 </div>

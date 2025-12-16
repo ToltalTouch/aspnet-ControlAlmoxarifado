@@ -237,4 +237,23 @@
     // extra retries to handle late-rendered content/hot-reload scenarios
     setTimeout(autoExpandOnce, 300);
     setTimeout(autoExpandOnce, 1000);
+
+    window.loadingOverlay = {
+    show: function(id = 'items-loading-overlay') {
+        const overlay = document.getElementById(id);
+        const area = overlay?.closest('.items-area');
+        if (!overlay) return;
+        overlay.style.display = 'flex';
+        overlay.setAttribute('aria-hidden', 'false');
+        if (area) area.classList.add('loading');
+    },
+    hide: function(id = 'items-loading-overlay') {
+        const overlay = document.getElementById(id);
+        const area = overlay?.closest('.items-area');
+        if (!overlay) return;
+        overlay.style.display = 'none';
+        overlay.setAttribute('aria-hidden', 'true');
+        if (area) area.classList.remove('loading');
+    }
+    };
 })();

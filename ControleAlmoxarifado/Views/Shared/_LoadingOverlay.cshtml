@@ -1,0 +1,13 @@
+@{
+    // Accepts optional ViewData keys: overlayId (string), message (string), hidden (bool)
+    var id = ViewData["overlayId"] as string ?? "items-loading-overlay";
+    var message = ViewData["message"] as string ?? "Carregando...";
+    var hidden = (ViewData["hidden"] as bool?) ?? true;
+}
+
+<div id="@id" class="items-loading-overlay" aria-hidden="@(hidden ? "true" : "false")" style="@(hidden ? "display:none;" : "display:flex;")">
+    <div class="items-loading-content text-center">
+        <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
+        <div class="mt-2">@message</div>
+    </div>
+</div>
