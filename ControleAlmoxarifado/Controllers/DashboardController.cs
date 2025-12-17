@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControleAlmoxarifado.Controllers;
 
-public class HomeController : Controller
+public class DashboardController : Controller
 {
     public IActionResult Index()
     {

@@ -1,0 +1,184 @@
+@model ControleAlmoxarifado.Models.HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Almoxarifado";
+    var pageSize = Model?.PageSize ?? 10; // limite de item por pagina
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main content -->
+        <main role="main" class="col-md-10 ml-sm-auto px-4">
+            <div class="d-flex align-items-center justify-content-between pt-3 pb-2 mb-3 border-bottom">
+                <h2>Almoxarifado Atual</h2>
+                <div class="d-flex align-items-center">
+                    <a class="btn btn-success ms-3 open-remote-modal"
+                        href="javascript:void(0)"
+                        data-url="@Url.Action("NewEntry", "Home")">+ Nova Entrada</a>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <form method="get" class="row g-2">
+                        <div class="col-12">
+                            <div class="me-2" style="min-width:420px;">
+                                <input class="form-control" type="search" name="q" value="@(Model?.SearchQuery ?? "")"
+                                       placeholder="Buscar Item" aria-label="Buscar">
+                            </div>
+                        </div>
+                        <div class="me-3" style="max-width: 350px;">
+                            <select class="form-select" name="category" onchange="this.form.submit()">
+                                <option value="">Categoria</option>
+                                @foreach (var c in Model?.Categories ?? Enumerable.Empty<string>())
+                                {
+                                    if (c == Model?.SelectedCategory)
+                                    {
+                                        <option value="@c" selected>@c</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@c">@c</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-3" style="max-width: 135px;">
+                            <select class="form-select" name="size" onchange="this.form.submit()">
+                                <option value="">Tamanhos</option>
+                                @foreach (var s in Model?.SizeOptions ?? Enumerable.Empty<string>())
+                                {
+                                    if (s == Model?.SelectedSize)
+                                    {
+                                        <option value="@s" selected>@s</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@s">@s</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-3" style="max-width: 130px;">
+                            <select class="form-select" name="gender" onchange="this.form.submit()">
+                                <option value="">Gênero</option>
+                                @foreach (var g in Model?.GenderOptions ?? Enumerable.Empty<string>())
+                                {
+                                    if (g == Model?.SelectedGender)
+                                    {
+                                        <option value="@g" selected>@g</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@g">@g</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-3" style="max-width: 120px;">
+                            <select class="form-select" name="status" onchange="this.form.submit()">
+                                <option value="">Status</option>
+                                @foreach (var s in Model?.Statuses ?? Enumerable.Empty<string>())
+                                {
+                                    if (s == Model?.SelectedStatus)
+                                    {
+                                        <option value="@s" selected>@s</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@s">@s</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="d-flex justify-content-end">
+                                <a id="resetFilters" class="btn btn-outline-secondary me-2" href="javascript:void(0)" data-url="@Url.Action("Index", "Home")">
+                                    Limpar Filtros
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body p-0">
+                    <div id="items-area" class="items-area position-relative">
+                        @{
+                            ViewData["overlayId"] = "items-loading-overlay";
+                            ViewData["message"] = "Carregando itens...";
+                            ViewData["hidden"] = true;
+                        }
+
+                        @await Html.PartialAsync("_LoadingOverlay")
+                        <div class="items-content">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="max-width:110px;">Imagem</th>
+                                    <th style="max-width:260px;">Item</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model?.Items != null && Model.Items.Any())
+                                {
+                                    foreach (var item in Model.Items)
+                                    {
+                                        <tr data-item-id="@item.Id">
+                                            <td>
+                                                <img src="@item.ImagemUrl" 
+                                                    class="img-thumbnail" 
+                                                    style="max-width:120px;" 
+                                                    alt="@item.Item" />
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0)"
+                                                    class="item-toggle"
+                                                    data-item="@item.Item">@item.Item</a>
+                                            </td>
+                                        </tr>
+
+                                        <tr class="sizes-row" data-parent-id="@item.Id" style="display:none;">
+                                            <td colspan="9">
+                                        <div class="sizes-container"
+                                            data-item="@item.Item"
+                                            data-loaded="false"
+                                            data-selected-size="@(Model?.SelectedSize ?? "")"
+                                            data-selected-gender="@(Model?.SelectedGender ?? "")"></div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="10" class="text-center">Nenhum item encontrado.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+
+                <div class="modal fade" id="modalEdit" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content" id="modalEditContent">
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    @await Html.PartialAsync("_Pagination", Model)
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

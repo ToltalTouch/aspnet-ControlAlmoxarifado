@@ -36,6 +36,17 @@ namespace ControleAlmoxarifado.Controllers
             _logger = logger;
         }
 
+        // GET: /Item
+        public async Task<IActionResult> Index()
+        {
+            var items = await _db.Itens
+                .AsNoTracking()
+                .OrderBy(i => i.Id)
+                .ToListAsync();
+
+            return View(items);
+        }
+
         // GET: /Item/Edit/5
         public async Task<IActionResult> Edit(int id)
         {

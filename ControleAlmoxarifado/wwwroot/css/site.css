@@ -58,3 +58,19 @@ body {
   pointer-events: none;
   user-select: none;
 }
+
+.sidebar-sticky {
+  position: sticky;
+  top: 70px;
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
+  padding-bottom: 1rem;
+}
+
+@media (max-width: 767.98px) {
+  .sidebar-sticky {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
+}

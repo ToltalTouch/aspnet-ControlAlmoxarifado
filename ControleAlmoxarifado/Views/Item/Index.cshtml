@@ -1,0 +1,30 @@
+@model IEnumerable<ControleAlmoxarifado.Models.Itens>
+
+@{
+    ViewData["Title"] = "Itens";
+}
+
+<h2>Itens</h2>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Item</th>
+            <th>Quantidade</th>
+            <th>Local</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var it in Model ?? Enumerable.Empty<ControleAlmoxarifado.Models.Itens>())
+    {
+        <tr>
+            <td>@it.Id</td>
+            <td>@it.Item</td>
+            <td>@it.Quantidade</td>
+            <td>@it.Local</td>
+            <td><a class="btn btn-sm btn-outline-primary" asp-controller="Item" asp-action="Edit" asp-route-id="@it.Id">Editar</a></td>
+        </tr>
+    }
+    </tbody>
+</table>
