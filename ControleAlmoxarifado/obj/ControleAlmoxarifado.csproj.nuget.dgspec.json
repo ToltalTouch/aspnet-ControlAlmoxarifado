@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj": {}
+    "C:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj": {}
   },
   "projects": {
-    "c:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj": {
+    "C:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj",
+        "projectUniqueName": "C:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj",
         "projectName": "ControleAlmoxarifado",
-        "projectPath": "c:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj",
+        "projectPath": "C:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj",
         "packagesPath": "C:\\Users\\micael.amaral\\.nuget\\packages\\",
-        "outputPath": "c:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\obj\\",
+        "outputPath": "C:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

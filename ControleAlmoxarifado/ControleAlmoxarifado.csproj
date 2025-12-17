@@ -19,6 +19,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
   </ItemGroup>
 
+    <!-- Exclude wrongly placed scoped css file under wwwroot which causes BLAZOR102 -->
+    <ItemGroup>
+      <Content Remove="wwwroot\css\_Layout.cshtml.css" />
+    </ItemGroup>
+
   <!-- ProjectReference removed: the referenced project 'ControleAlmoxarifado.Data' is not present in the repository.
        If you intend to restore it, re-add a project at ../ControleAlmoxarifado.Data/ControleAlmoxarifado.Data.csproj
        and then re-add a ProjectReference here. -->

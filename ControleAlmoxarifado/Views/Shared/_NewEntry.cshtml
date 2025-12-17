@@ -1,0 +1,52 @@
+@model ControleAlmoxarifado.Models.NewEntryModel
+
+<form asp-action="NewEntry" asp-controller="Home" method="post" enctype="multipart/form-data" id="newItemForm">
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+        <h5 class="modal-title">Novo Item</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+        <div class="mb-3">
+            <label asp-for="Item" class="form-label"></label>
+            <input asp-for="Item" class="form-control" />
+            <span asp-validation-for="Item" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Tamanho" class="form-label"></label>
+            <select asp-for="Tamanho" class="form-select">
+                <option value="">Selecione</option>
+                @foreach(var s in Model.TamanhoOptions ?? Enumerable.Empty<string>()){
+                    <option value="@s">@s</option>
+                }
+            </select>
+            <span asp-validation-for="Tamanho" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Quantidade" class="form-label"></label>
+            <input asp-for="Quantidade" class="form-control" />
+            <span asp-validation-for="Quantidade" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Genero" class="form-label"></label>
+            <input asp-for="Genero" class="form-control" />
+            <span asp-validation-for="Genero" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Local" class="form-label"></label>
+            <input asp-for="Local" class="form-control" />
+            <span asp-validation-for="Local" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+</form>

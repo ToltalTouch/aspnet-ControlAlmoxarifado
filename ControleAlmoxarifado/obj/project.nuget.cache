@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "g+gxgefz1yU=",
+  "dgSpecHash": "I0ykz0nCYC4=",
   "success": true,
-  "projectFilePath": "c:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj",
+  "projectFilePath": "C:\\C#\\aspnet-ControlAlmoxarifado\\ControleAlmoxarifado\\ControleAlmoxarifado.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\micael.amaral\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\micael.amaral\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
