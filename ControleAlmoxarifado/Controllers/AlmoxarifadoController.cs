@@ -82,15 +82,45 @@ namespace ControleAlmoxarifado.Controllers
                 if (string.IsNullOrWhiteSpace(itemName))
                     return BadRequest();
 
-                var sizes = await _db.Itens
+                var itemNameTrim = itemName.Trim();
+                var itemNameLower = itemNameTrim.ToLower();
+
+                _logger.LogInformation("Sizes requested for item='{itemName}'", itemNameTrim);
+
+                var sizesQuery = _db.Itens
                     .AsNoTracking()
-                    .Where(i => i.Item == itemName && !string.IsNullOrWhiteSpace(i.Tamanho))
+                    .Where(i => i.Item != null && i.Item.Trim().ToLower() == itemNameLower && i.Tamanho != null && i.Tamanho.Trim() != string.Empty)
                     .Select(i => i.Tamanho!.Trim())
                     .Distinct()
-                    .OrderBy(t => t)
+                    .OrderBy(t => t);
+
+                var sizes = await sizesQuery.ToListAsync();
+
+                // For debugging: also fetch the matching rows (ids and raw fields) so we can inspect why a match may be empty
+                var matches = await _db.Itens
+                    .AsNoTracking()
+                    .Where(i => i.Item != null && i.Item.Trim().ToLower() == itemNameLower)
+                    .Select(i => new {
+                        i.Id,
+                        Item = i.Item!.Trim(),
+                        Tamanho = i.Tamanho,
+                        Genero = i.Genero,
+                        Local = i.Local,
+                        i.Quantidade
+                    })
+                    .OrderBy(x => x.Id)
                     .ToListAsync();
 
-                ViewBag.ItemName = itemName;
+                ViewBag.ItemName = itemNameTrim;
+                _logger.LogInformation("Sizes for item='{itemName}' -> {count} sizes, {matchCount} matching rows", itemNameTrim, sizes.Count, matches.Count);
+
+                // If the caller requested debug output (e.g. ?debug=true) return JSON with sizes and matching rows
+                var debug = HttpContext.Request.Query["debug"].ToString();
+                if (!string.IsNullOrEmpty(debug) && debug.Equals("true", StringComparison.OrdinalIgnoreCase))
+                {
+                    return Json(new { item = itemNameTrim, sizes, matches });
+                }
+
                 return PartialView("_SizesPartial", sizes);
             }
         
@@ -105,11 +135,16 @@ namespace ControleAlmoxarifado.Controllers
                 var sizeTrim = size.Trim();
                 _logger.LogInformation("SizeDetails called for item='{itemName}', size='{size}'", itemName, sizeTrim);
 
-                IQueryable<Itens> vquery = _db.Itens.AsNoTracking().Where(i => i.Item == itemName);
+                var itemTrim = itemName.Trim();
+                var itemTrimLower = itemTrim.ToLower();
+
+                IQueryable<Itens> vquery = _db.Itens.AsNoTracking().Where(i => i.Item != null && i.Item.Trim().ToLower() == itemTrimLower);
 
                 if (!string.Equals(sizeTrim, "ALL", StringComparison.OrdinalIgnoreCase))
                 {
-                    vquery = vquery.Where(i => i.Tamanho != null && i.Tamanho.Trim() == sizeTrim);
+                    // normalize size for case-insensitive comparison and to reduce issues from hidden whitespace
+                    var sizeNormalized = sizeTrim.ToLower();
+                    vquery = vquery.Where(i => i.Tamanho != null && i.Tamanho.Trim().ToLower() == sizeNormalized);
                 }
 
                 if (!string.IsNullOrWhiteSpace(gender))
@@ -186,8 +221,10 @@ namespace ControleAlmoxarifado.Controllers
 
                 if (!string.IsNullOrWhiteSpace(size))
                 {
+                    // normalize size to avoid mismatches due to casing or hidden whitespace characters
                     var sizeTrim = size.Trim();
-                    query = query.Where(i => i.Tamanho != null && i.Tamanho.Trim() == sizeTrim);
+                    var sizeNormalized = sizeTrim.ToLower();
+                    query = query.Where(i => i.Tamanho != null && i.Tamanho.Trim().ToLower() == sizeNormalized);
                 }
 
                 if (!string.IsNullOrWhiteSpace(q))
@@ -223,7 +260,7 @@ namespace ControleAlmoxarifado.Controllers
                     reps.TryGetValue(x.RepresentativeId, out var rep);
                     return new Itens {
                         Id = x.RepresentativeId,
-                        Item = x.ItemName ?? string.Empty,
+                        Item = (x.ItemName ?? string.Empty).Trim(),
                         ImagemUrl = rep?.ImagemUrl ?? string.Empty,
                         Genero = rep?.Genero ?? string.Empty,
                         Local = rep?.Local ?? string.Empty,

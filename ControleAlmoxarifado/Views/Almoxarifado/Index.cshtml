@@ -14,7 +14,7 @@
                 <div class="d-flex align-items-center">
                     <a class="btn btn-success ms-3 open-remote-modal"
                         href="javascript:void(0)"
-                        data-url="@Url.Action("NewEntry", "Home")">+ Nova Entrada</a>
+                        data-url="@Url.Action("NewEntry", "Almoxarifado")">+ Nova Entrada</a>
                 </div>
             </div>
 
@@ -97,7 +97,7 @@
 
                         <div class="col-md-3">
                             <div class="d-flex justify-content-end">
-                                <a id="resetFilters" class="btn btn-outline-secondary me-2" href="javascript:void(0)" data-url="@Url.Action("Index", "Home")">
+                                <a id="resetFilters" class="btn btn-outline-secondary me-2" href="javascript:void(0)" data-url="@Url.Action("Index", "Almoxarifado")">
                                     Limpar Filtros
                                 </a>
                             </div>
@@ -150,7 +150,9 @@
                                             data-item="@item.Item"
                                             data-loaded="false"
                                             data-selected-size="@(Model?.SelectedSize ?? "")"
-                                            data-selected-gender="@(Model?.SelectedGender ?? "")"></div>
+                                            data-selected-gender="@(Model?.SelectedGender ?? "")"
+                                            data-sizes-url="@Url.Action("Sizes", "Almoxarifado")"
+                                            data-size-details-url="@Url.Action("SizeDetails", "Almoxarifado")"></div>
                                             </td>
                                         </tr>
                                     }

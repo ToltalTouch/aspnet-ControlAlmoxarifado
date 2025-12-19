@@ -4,11 +4,14 @@
         if (!itemName) return;
 
         try {
-            const res = await fetch('/Home/Sizes?itemName=' + encodeURIComponent(itemName), {
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            });
+            // prefer a URL provided by the server (handles apps hosted under a sub-path)
+            const sizesUrlBase = container.dataset.sizesUrl || '/Almoxarifado/Sizes';
+            const sizesUrl = sizesUrlBase + '?itemName=' + encodeURIComponent(itemName);
+            // debug: show the URL and container dataset so we can diagnose 404s
+            console.debug('[itens-sizes] fetch sizes for', { itemName, sizesUrlBase, sizesUrl, dataset: { ...container.dataset } });
+            const res = await fetch(sizesUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
             if (!res.ok) {
-                console.error('Erro ao carregar tamanhos:', res.status);
+                console.error('Erro ao carregar tamanhos:', res.status, 'url=', sizesUrl);
                 // replace spinner with user-visible error
                 try {
                     container.innerHTML = '<div class="text-danger">Erro ao carregar tamanhos. (status ' + res.status + ')</div>';
@@ -56,7 +59,10 @@
         console.debug('[itens-sizes] loading size details', { item: itemName, size: size, selectedGender: container.dataset.selectedGender });
 
         try {
-            let url = '/Home/SizeDetails?itemName=' + encodeURIComponent(itemName) + '&size=' + encodeURIComponent(size);
+            // prefer server-provided URL to avoid issues with base-paths
+            const sizeDetailsBase = container.dataset.sizeDetailsUrl || '/Almoxarifado/SizeDetails';
+            let url = sizeDetailsBase + '?itemName=' + encodeURIComponent(itemName) + '&size=' + encodeURIComponent(size);
+            console.debug('[itens-sizes] fetch size details', { itemName, size, sizeDetailsBase, url, dataset: { ...container.dataset } });
             const gender = container.dataset.selectedGender;
             if (gender && gender.toString().trim() !== '') {
                 url += '&gender=' + encodeURIComponent(gender);

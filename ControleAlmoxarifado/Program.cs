@@ -55,7 +55,8 @@ app.UseStaticFiles();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    // make Almoxarifado the default controller so the inventory index is the site root
+    pattern: "{controller=Almoxarifado}/{action=Index}/{id?}")
     ;
 
 
