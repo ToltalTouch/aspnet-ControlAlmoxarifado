@@ -1,15 +1,68 @@
+@using System.Reflection.Metadata
 @* Partial: Sidebar menu *@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar pt-3">
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+    Func<string, string, string> linkClass = (controller, action) =>
+    {
+        var isActive = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase)
+                          && (string.IsNullOrEmpty(action) || string.Equals(currentAction, action, System.StringComparison.OrdinalIgnoreCase));
+        var baseClasses = "nav-link d-flex align-items-center gap-2 text-white";
+        return isActive ? baseClasses + " active" : baseClasses;
+    };
+}
+
+<nav class="sidebar d-flex flex-column flex-shrink-0 p-3" style="width: 280px; height: 100vh;">
     <div class="sidebar-sticky sticky-top">
         <h5 class="px-3">Menu</h5>
-        <ul class="nav flex-column mt-3">
-            <li class="nav-item px-3 py-1"><a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a></li>
-            <li class="nav-item px-3 py-1"><a class="nav-link text-dark" asp-controller="Almoxarifado" asp-action="Index">Almoxarifado</a></li>
-            <li class="nav-item px-3 py-1"><a class="nav-link text-dark" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-            <li class="nav-item px-3 py-1"><a class="nav-link text-dark" asp-controller="Acessorios" asp-action="Index">Acessórios</a></li>
-            <li class="nav-item px-3 py-1"><a class="nav-link text-dark" asp-controller="Home" asp-action="NewEntry">Entradas</a></li>
-            <li class="nav-item px-3 py-1"><a class="nav-link text-dark" asp-controller="Item" asp-action="Index">Saídas</a></li>
-            <li class="nav-item px-3 py-1"><a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Relatórios</a></li>
+        <hr/>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item px-3 py-1">
+                <a class="@linkClass("Home", "Index")" asp-controller="Home" asp-action="Index">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
+                </svg>
+                Home
+            </a>
+            </li>
+            <hr/>
+            <li class="nav-item px-3 py-1">
+                <a class="@linkClass("Almoxarifado", "Index")" asp-controller="Almoxarifado" asp-action="Index">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-inboxes-fill" viewBox="0 0 16 16">
+                    <path d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z"/>
+                </svg>
+                Almoxarifado
+                </a>
+            </li>
+            <hr/>
+            <li class="nav-item px-3 py-1">
+                <a class="@linkClass("Acessorios", "Index")" asp-controller="Acessorios" asp-action="Index">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-luggage-fill" viewBox="0 0 16 16">
+                    <path d="M2 1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V5h.5A1.5 1.5 0 0 1 8 6.5V7H7v-.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5H4v1H2.5v.25a.75.75 0 0 1-1.5 0v-.335A1.5 1.5 0 0 1 0 13.5v-7A1.5 1.5 0 0 1 1.5 5H2zM3 5h2V2H3z"/>
+                    <path d="M2.5 7a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5m10 1v-.5A1.5 1.5 0 0 0 11 6h-1a1.5 1.5 0 0 0-1.5 1.5V8H8v8h5V8zM10 7h1a.5.5 0 0 1 .5.5V8h-2v-.5A.5.5 0 0 1 10 7M5 9.5A1.5 1.5 0 0 1 6.5 8H7v8h-.5A1.5 1.5 0 0 1 5 14.5zm9 6.5V8h.5A1.5 1.5 0 0 1 16 9.5v5a1.5 1.5 0 0 1-1.5 1.5z"/>
+                </svg>
+                  Acessórios
+                </a>
+            </li>
+            <hr/>
+            <li class="nav-item px-3 py-1">
+                <a class="@linkClass("Home", "NewEntry")" asp-controller="Home" asp-action="NewEntry">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5M8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6"/>
+                </svg>
+                Entradas
+                </a>
+            </li>
+            <hr/>
+            <li class="nav-item px-3 py-1">
+                <a class="@linkClass("Item", "Index")" asp-controller="Item" asp-action="Index">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/>
+                </svg>
+                Saídas
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

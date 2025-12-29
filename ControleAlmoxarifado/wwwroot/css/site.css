@@ -59,6 +59,7 @@ body {
   user-select: none;
 }
 
+/* Sidebar styles */
 .sidebar-sticky {
   position: sticky;
   top: 70px;
@@ -73,4 +74,46 @@ body {
     max-height: none;
     overflow-y: visible;
   }
+}
+
+.sidebar {
+  background: #212529;
+  min-height: 100vh;
+}
+
+.sidebar .nav-link {
+  color: rgba(255,255,255,0.92);
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background-color .15s, color .15s;
+}
+
+.sidebar .nav-link svg {
+  width: 32px;
+  height: 32px;
+  color: currentColor;
+}
+
+.sidebar .nav-link:hover {
+  background: rgba(255,255,255,0.04);
+  color: #ffffff;
+}
+
+.sidebar .nav-link:hover { background: rgba(255,255,255,0.04); color:#fff; }
+
+.sidebar .nav-link.active {
+  background: #0d6efd;
+  color: #ffffff;
+  box-shadow: 0 0 0 0.125rem rgba(12,110,253,0.18)
+}
+
+.sidebar hr {
+  margin: 8px 0;
+  border-color: rgba(255, 255, 255, 0.651);
+}
+
+.sidebar h5 {
+  color: #ffffff;
+  padding: 0 14px;
+  font-size: 30px;
 }
