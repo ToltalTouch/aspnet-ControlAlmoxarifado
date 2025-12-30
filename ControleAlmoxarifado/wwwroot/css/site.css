@@ -117,3 +117,55 @@ body {
   padding: 0 14px;
   font-size: 30px;
 }
+
+/* Theme variables and transitions */
+:root {
+  --bg: #fff;
+  --text: #212529;
+  --sidebar-bg: #f8f9fa;
+  --link-hover-bg: rgba(0,0,0,0.04);
+  --active-bg: #0d6efd;
+}
+
+body[data-theme="dark"] {
+  --bg: #0f1320;
+  --text: #fff;
+  --sidebar-bg: #212529;
+  --link-color: rgba(255,255,255,0.97);
+  --link-hover-bg: rgba(255,255,255,0.4);
+  --active-bg: #0d6efd;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar {
+  --background: var(--sidebar-bg);
+  --transition: background-color 0.2s ease;
+}
+
+.sidebar .nav-link {
+  color: var(--link-color, rgba(0,0,0,0.92));
+}
+
+.sidebar .nav-link:hover {
+  background: var(--link-hover-bg);
+}
+
+.sidebar .nav-link.active {
+  background: var(--active-bg);
+  color: #fff !important;
+}
+
+#themeToggle {
+  width: 38px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 6px;
+}
